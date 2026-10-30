@@ -1,0 +1,30 @@
+[project]
+name = "entur-mcp"
+version = "0.1.0"
+description = "MCP server for real-time public transport departures in Norway via Entur"
+readme = "README.md"
+authors = [
+    { name = "Santhan Chanrasekaram", email = "santhanc@users.noreply.github.com" }
+]
+requires-python = ">=3.11"
+dependencies = [
+    "httpx>=0.28,<1",
+    "mcp>=2.3,<3",
+    "pydantic>=2",
+]
+
+[project.scripts]
+entur-mcp = "entur_mcp.server:main"
+
+[build-system]
+requires = ["uv_build>=0.11.21,<0.12.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+]
+
+[tool.pytest.ini_options]
+markers = ["live: kaller Entur over nett"]
+addopts = "-m 'not live'"

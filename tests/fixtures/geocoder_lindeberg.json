@@ -1,0 +1,219 @@
+{
+  "geocoding": {
+    "version": "0.2",
+    "attribution": "http://pelias.mapzen.com/v1/attribution",
+    "engine": {
+      "name": "Photon",
+      "author": "Komoot",
+      "version": "1.2.0"
+    },
+    "timestamp": 1793374501278
+  },
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.881797,
+          59.93292
+        ]
+      },
+      "properties": {
+        "id": "NSR:StopPlace:58222",
+        "gid": "openstreetmap:venue:NSR:StopPlace:58222",
+        "layer": "venue",
+        "source": "openstreetmap",
+        "source_id": "NSR:StopPlace:58222",
+        "name": "Lindeberg",
+        "street": "NOT_AN_ADDRESS-NSR:StopPlace:58222",
+        "accuracy": "point",
+        "country_a": "NOR",
+        "county": "Oslo",
+        "county_gid": "whosonfirst:county:KVE:TopographicPlace:03",
+        "locality": "Oslo",
+        "locality_gid": "whosonfirst:locality:KVE:TopographicPlace:0301",
+        "label": "Lindeberg, Oslo",
+        "category": [
+          "metroStation",
+          "onstreetBus"
+        ],
+        "mode": [
+          {
+            "metro": null
+          },
+          {
+            "bus": null
+          }
+        ],
+        "tariff_zones": [
+          "RUT:TariffZone:1",
+          "RUT:FareZone:4"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          11.128091,
+          60.039572
+        ]
+      },
+      "properties": {
+        "id": "NSR:StopPlace:62094",
+        "gid": "openstreetmap:venue:NSR:StopPlace:62094",
+        "layer": "venue",
+        "source": "openstreetmap",
+        "source_id": "NSR:StopPlace:62094",
+        "name": "Lindeberg stasjon",
+        "street": "NOT_AN_ADDRESS-NSR:StopPlace:62094",
+        "accuracy": "point",
+        "country_a": "NOR",
+        "county": "Akershus",
+        "county_gid": "whosonfirst:county:KVE:TopographicPlace:32",
+        "locality": "Lillestrøm",
+        "locality_gid": "whosonfirst:locality:KVE:TopographicPlace:3205",
+        "label": "Lindeberg stasjon, Lillestrøm",
+        "category": [
+          "railStation",
+          "onstreetBus"
+        ],
+        "mode": [
+          {
+            "rail": null
+          },
+          {
+            "bus": "railReplacementBus"
+          }
+        ],
+        "tariff_zones": [
+          "RUT:TariffZone:3Ø",
+          "RUT:FareZone:2"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          11.275433,
+          59.775639
+        ]
+      },
+      "properties": {
+        "id": "NSR:StopPlace:4396",
+        "gid": "whosonfirst:venue:NSR:StopPlace:4396",
+        "layer": "venue",
+        "source": "whosonfirst",
+        "source_id": "NSR:StopPlace:4396",
+        "name": "Lindeberg gård",
+        "street": "NOT_AN_ADDRESS-NSR:StopPlace:4396",
+        "accuracy": "point",
+        "country_a": "NOR",
+        "county": "Akershus",
+        "county_gid": "whosonfirst:county:KVE:TopographicPlace:32",
+        "locality": "Lillestrøm",
+        "locality_gid": "whosonfirst:locality:KVE:TopographicPlace:3205",
+        "label": "Lindeberg gård, Lillestrøm",
+        "category": [
+          "onstreetBus"
+        ],
+        "mode": [
+          {
+            "bus": null
+          }
+        ],
+        "tariff_zones": [
+          "RUT:TariffZone:3Ø",
+          "RUT:FareZone:2"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          11.125447,
+          60.037715
+        ]
+      },
+      "properties": {
+        "id": "NSR:StopPlace:4070",
+        "gid": "whosonfirst:venue:NSR:StopPlace:4070",
+        "layer": "venue",
+        "source": "whosonfirst",
+        "source_id": "NSR:StopPlace:4070",
+        "name": "Lindeberg handel",
+        "street": "NOT_AN_ADDRESS-NSR:StopPlace:4070",
+        "accuracy": "point",
+        "country_a": "NOR",
+        "county": "Akershus",
+        "county_gid": "whosonfirst:county:KVE:TopographicPlace:32",
+        "locality": "Lillestrøm",
+        "locality_gid": "whosonfirst:locality:KVE:TopographicPlace:3205",
+        "label": "Lindeberg handel, Lillestrøm",
+        "category": [
+          "onstreetBus"
+        ],
+        "mode": [
+          {
+            "bus": null
+          }
+        ],
+        "tariff_zones": [
+          "RUT:TariffZone:3Ø",
+          "RUT:FareZone:2"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.622143,
+          59.932957
+        ]
+      },
+      "properties": {
+        "id": "NSR:StopPlace:3671",
+        "gid": "whosonfirst:venue:NSR:StopPlace:3671",
+        "layer": "venue",
+        "source": "whosonfirst",
+        "source_id": "NSR:StopPlace:3671",
+        "name": "Lindebergveien",
+        "street": "NOT_AN_ADDRESS-NSR:StopPlace:3671",
+        "accuracy": "point",
+        "country_a": "NOR",
+        "county": "Akershus",
+        "county_gid": "whosonfirst:county:KVE:TopographicPlace:32",
+        "locality": "Bærum",
+        "locality_gid": "whosonfirst:locality:KVE:TopographicPlace:3201",
+        "label": "Lindebergveien, Bærum",
+        "category": [
+          "onstreetBus"
+        ],
+        "mode": [
+          {
+            "bus": null
+          }
+        ],
+        "tariff_zones": [
+          "RUT:TariffZone:1",
+          "RUT:FareZone:4"
+        ]
+      }
+    }
+  ],
+  "bbox": [
+    10.622143,
+    59.775639,
+    11.275433,
+    60.039572
+  ]
+}

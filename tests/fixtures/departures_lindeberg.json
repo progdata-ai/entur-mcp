@@ -1,0 +1,754 @@
+{
+  "data": {
+    "stopPlace": {
+      "id": "NSR:StopPlace:58222",
+      "name": "Lindeberg",
+      "estimatedCalls": [
+        {
+          "realtime": true,
+          "cancellation": false,
+          "aimedDepartureTime": "2026-10-30T16:36:00+01:00",
+          "expectedDepartureTime": "2026-10-30T16:36:00+01:00",
+          "quay": {
+            "id": "NSR:Quay:10269",
+            "publicCode": "2",
+            "name": "Lindeberg"
+          },
+          "destinationDisplay": {
+            "frontText": "Østerås"
+          },
+          "serviceJourney": {
+            "line": {
+              "publicCode": "2",
+              "transportMode": "metro"
+            }
+          },
+          "situations": []
+        },
+        {
+          "realtime": true,
+          "cancellation": false,
+          "aimedDepartureTime": "2026-10-30T16:32:00+01:00",
+          "expectedDepartureTime": "2026-10-30T16:36:44+01:00",
+          "quay": {
+            "id": "NSR:Quay:10274",
+            "publicCode": "",
+            "name": "Lindeberg T"
+          },
+          "destinationDisplay": {
+            "frontText": "Åsbråten"
+          },
+          "serviceJourney": {
+            "line": {
+              "publicCode": "79",
+              "transportMode": "bus"
+            }
+          },
+          "situations": []
+        },
+        {
+          "realtime": true,
+          "cancellation": false,
+          "aimedDepartureTime": "2026-10-30T16:36:00+01:00",
+          "expectedDepartureTime": "2026-10-30T16:39:12+01:00",
+          "quay": {
+            "id": "NSR:Quay:10272",
+            "publicCode": "",
+            "name": "Lindeberg T"
+          },
+          "destinationDisplay": {
+            "frontText": "Grorud T"
+          },
+          "serviceJourney": {
+            "line": {
+              "publicCode": "79",
+              "transportMode": "bus"
+            }
+          },
+          "situations": []
+        },
+        {
+          "realtime": true,
+          "cancellation": false,
+          "aimedDepartureTime": "2026-10-30T16:40:00+01:00",
+          "expectedDepartureTime": "2026-10-30T16:41:53+01:00",
+          "quay": {
+            "id": "NSR:Quay:10270",
+            "publicCode": "1",
+            "name": "Lindeberg"
+          },
+          "destinationDisplay": {
+            "frontText": "Ellingsrudåsen"
+          },
+          "serviceJourney": {
+            "line": {
+              "publicCode": "2",
+              "transportMode": "metro"
+            }
+          },
+          "situations": []
+        },
+        {
+          "realtime": true,
+          "cancellation": false,
+          "aimedDepartureTime": "2026-10-30T16:44:00+01:00",
+          "expectedDepartureTime": "2026-10-30T16:44:00+01:00",
+          "quay": {
+            "id": "NSR:Quay:10269",
+            "publicCode": "2",
+            "name": "Lindeberg"
+          },
+          "destinationDisplay": {
+            "frontText": "Østerås"
+          },
+          "serviceJourney": {
+            "line": {
+              "publicCode": "2",
+              "transportMode": "metro"
+            }
+          },
+          "situations": []
+        },
+        {
+          "realtime": true,
+          "cancellation": false,
+          "aimedDepartureTime": "2026-10-30T16:41:00+01:00",
+          "expectedDepartureTime": "2026-10-30T16:44:00+01:00",
+          "quay": {
+            "id": "NSR:Quay:10272",
+            "publicCode": "",
+            "name": "Lindeberg T"
+          },
+          "destinationDisplay": {
+            "frontText": "Ellingsrudåsen"
+          },
+          "serviceJourney": {
+            "line": {
+              "publicCode": "26",
+              "transportMode": "bus"
+            }
+          },
+          "situations": []
+        },
+        {
+          "realtime": true,
+          "cancellation": false,
+          "aimedDepartureTime": "2026-10-30T16:42:00+01:00",
+          "expectedDepartureTime": "2026-10-30T16:46:36+01:00",
+          "quay": {
+            "id": "NSR:Quay:10274",
+            "publicCode": "",
+            "name": "Lindeberg T"
+          },
+          "destinationDisplay": {
+            "frontText": "Åsbråten"
+          },
+          "serviceJourney": {
+            "line": {
+              "publicCode": "79",
+              "transportMode": "bus"
+            }
+          },
+          "situations": []
+        },
+        {
+          "realtime": true,
+          "cancellation": false,
+          "aimedDepartureTime": "2026-10-30T16:47:00+01:00",
+          "expectedDepartureTime": "2026-10-30T16:47:00+01:00",
+          "quay": {
+            "id": "NSR:Quay:10270",
+            "publicCode": "1",
+            "name": "Lindeberg"
+          },
+          "destinationDisplay": {
+            "frontText": "Ellingsrudåsen"
+          },
+          "serviceJourney": {
+            "line": {
+              "publicCode": "2",
+              "transportMode": "metro"
+            }
+          },
+          "situations": []
+        },
+        {
+          "realtime": true,
+          "cancellation": false,
+          "aimedDepartureTime": "2026-10-30T16:49:00+01:00",
+          "expectedDepartureTime": "2026-10-30T16:49:00+01:00",
+          "quay": {
+            "id": "NSR:Quay:10274",
+            "publicCode": "",
+            "name": "Lindeberg T"
+          },
+          "destinationDisplay": {
+            "frontText": "Sinsen T"
+          },
+          "serviceJourney": {
+            "line": {
+              "publicCode": "26",
+              "transportMode": "bus"
+            }
+          },
+          "situations": []
+        },
+        {
+          "realtime": true,
+          "cancellation": false,
+          "aimedDepartureTime": "2026-10-30T16:46:00+01:00",
+          "expectedDepartureTime": "2026-10-30T16:49:29+01:00",
+          "quay": {
+            "id": "NSR:Quay:10272",
+            "publicCode": "",
+            "name": "Lindeberg T"
+          },
+          "destinationDisplay": {
+            "frontText": "Grorud T"
+          },
+          "serviceJourney": {
+            "line": {
+              "publicCode": "79",
+              "transportMode": "bus"
+            }
+          },
+          "situations": []
+        },
+        {
+          "realtime": true,
+          "cancellation": false,
+          "aimedDepartureTime": "2026-10-30T16:51:00+01:00",
+          "expectedDepartureTime": "2026-10-30T16:51:00+01:00",
+          "quay": {
+            "id": "NSR:Quay:10269",
+            "publicCode": "2",
+            "name": "Lindeberg"
+          },
+          "destinationDisplay": {
+            "frontText": "Østerås"
+          },
+          "serviceJourney": {
+            "line": {
+              "publicCode": "2",
+              "transportMode": "metro"
+            }
+          },
+          "situations": [
+            {
+              "summary": [
+                {
+                  "value": "Buss for bane",
+                  "language": "no"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "realtime": true,
+          "cancellation": false,
+          "aimedDepartureTime": "2026-10-30T16:52:00+01:00",
+          "expectedDepartureTime": "2026-10-30T16:53:37+01:00",
+          "quay": {
+            "id": "NSR:Quay:10274",
+            "publicCode": "",
+            "name": "Lindeberg T"
+          },
+          "destinationDisplay": {
+            "frontText": "Åsbråten"
+          },
+          "serviceJourney": {
+            "line": {
+              "publicCode": "79",
+              "transportMode": "bus"
+            }
+          },
+          "situations": []
+        },
+        {
+          "realtime": true,
+          "cancellation": false,
+          "aimedDepartureTime": "2026-10-30T16:55:00+01:00",
+          "expectedDepartureTime": "2026-10-30T16:56:51+01:00",
+          "quay": {
+            "id": "NSR:Quay:10270",
+            "publicCode": "1",
+            "name": "Lindeberg"
+          },
+          "destinationDisplay": {
+            "frontText": "Ellingsrudåsen"
+          },
+          "serviceJourney": {
+            "line": {
+              "publicCode": "2",
+              "transportMode": "metro"
+            }
+          },
+          "situations": []
+        },
+        {
+          "realtime": true,
+          "cancellation": true,
+          "aimedDepartureTime": "2026-10-30T16:56:00+01:00",
+          "expectedDepartureTime": "2026-10-30T16:58:13+01:00",
+          "quay": {
+            "id": "NSR:Quay:10272",
+            "publicCode": "",
+            "name": "Lindeberg T"
+          },
+          "destinationDisplay": {
+            "frontText": "Ellingsrudåsen"
+          },
+          "serviceJourney": {
+            "line": {
+              "publicCode": "26",
+              "transportMode": "bus"
+            }
+          },
+          "situations": []
+        },
+        {
+          "realtime": true,
+          "cancellation": false,
+          "aimedDepartureTime": "2026-10-30T16:59:00+01:00",
+          "expectedDepartureTime": "2026-10-30T16:59:00+01:00",
+          "quay": {
+            "id": "NSR:Quay:10269",
+            "publicCode": "2",
+            "name": "Lindeberg"
+          },
+          "destinationDisplay": {
+            "frontText": "Østerås"
+          },
+          "serviceJourney": {
+            "line": {
+              "publicCode": "2",
+              "transportMode": "metro"
+            }
+          },
+          "situations": []
+        },
+        {
+          "realtime": true,
+          "cancellation": false,
+          "aimedDepartureTime": "2026-10-30T17:02:00+01:00",
+          "expectedDepartureTime": "2026-10-30T17:02:00+01:00",
+          "quay": {
+            "id": "NSR:Quay:10274",
+            "publicCode": "",
+            "name": "Lindeberg T"
+          },
+          "destinationDisplay": {
+            "frontText": "Åsbråten"
+          },
+          "serviceJourney": {
+            "line": {
+              "publicCode": "79",
+              "transportMode": "bus"
+            }
+          },
+          "situations": []
+        },
+        {
+          "realtime": true,
+          "cancellation": false,
+          "aimedDepartureTime": "2026-10-30T16:56:00+01:00",
+          "expectedDepartureTime": "2026-10-30T17:02:09+01:00",
+          "quay": {
+            "id": "NSR:Quay:10272",
+            "publicCode": "",
+            "name": "Lindeberg T"
+          },
+          "destinationDisplay": {
+            "frontText": "Grorud T"
+          },
+          "serviceJourney": {
+            "line": {
+              "publicCode": "79",
+              "transportMode": "bus"
+            }
+          },
+          "situations": []
+        },
+        {
+          "realtime": true,
+          "cancellation": false,
+          "aimedDepartureTime": "2026-10-30T17:02:00+01:00",
+          "expectedDepartureTime": "2026-10-30T17:03:06+01:00",
+          "quay": {
+            "id": "NSR:Quay:10270",
+            "publicCode": "1",
+            "name": "Lindeberg"
+          },
+          "destinationDisplay": {
+            "frontText": "Ellingsrudåsen"
+          },
+          "serviceJourney": {
+            "line": {
+              "publicCode": "2",
+              "transportMode": "metro"
+            }
+          },
+          "situations": []
+        },
+        {
+          "realtime": false,
+          "cancellation": false,
+          "aimedDepartureTime": "2026-10-30T17:04:00+01:00",
+          "expectedDepartureTime": "2026-10-30T17:04:00+01:00",
+          "quay": {
+            "id": "NSR:Quay:10274",
+            "publicCode": "",
+            "name": "Lindeberg T"
+          },
+          "destinationDisplay": {
+            "frontText": "Sinsen T"
+          },
+          "serviceJourney": {
+            "line": {
+              "publicCode": "26",
+              "transportMode": "bus"
+            }
+          },
+          "situations": []
+        },
+        {
+          "realtime": true,
+          "cancellation": false,
+          "aimedDepartureTime": "2026-10-30T17:06:00+01:00",
+          "expectedDepartureTime": "2026-10-30T17:06:00+01:00",
+          "quay": {
+            "id": "NSR:Quay:10269",
+            "publicCode": "2",
+            "name": "Lindeberg"
+          },
+          "destinationDisplay": {
+            "frontText": "Østerås"
+          },
+          "serviceJourney": {
+            "line": {
+              "publicCode": "2",
+              "transportMode": "metro"
+            }
+          },
+          "situations": []
+        },
+        {
+          "realtime": true,
+          "cancellation": false,
+          "aimedDepartureTime": "2026-10-30T17:10:00+01:00",
+          "expectedDepartureTime": "2026-10-30T17:10:00+01:00",
+          "quay": {
+            "id": "NSR:Quay:10270",
+            "publicCode": "1",
+            "name": "Lindeberg"
+          },
+          "destinationDisplay": {
+            "frontText": "Ellingsrudåsen"
+          },
+          "serviceJourney": {
+            "line": {
+              "publicCode": "2",
+              "transportMode": "metro"
+            }
+          },
+          "situations": []
+        },
+        {
+          "realtime": true,
+          "cancellation": false,
+          "aimedDepartureTime": "2026-10-30T17:06:00+01:00",
+          "expectedDepartureTime": "2026-10-30T17:10:45+01:00",
+          "quay": {
+            "id": "NSR:Quay:10272",
+            "publicCode": "",
+            "name": "Lindeberg T"
+          },
+          "destinationDisplay": {
+            "frontText": "Grorud T"
+          },
+          "serviceJourney": {
+            "line": {
+              "publicCode": "79",
+              "transportMode": "bus"
+            }
+          },
+          "situations": []
+        },
+        {
+          "realtime": true,
+          "cancellation": false,
+          "aimedDepartureTime": "2026-10-30T17:12:00+01:00",
+          "expectedDepartureTime": "2026-10-30T17:12:00+01:00",
+          "quay": {
+            "id": "NSR:Quay:10274",
+            "publicCode": "",
+            "name": "Lindeberg T"
+          },
+          "destinationDisplay": {
+            "frontText": "Åsbråten"
+          },
+          "serviceJourney": {
+            "line": {
+              "publicCode": "79",
+              "transportMode": "bus"
+            }
+          },
+          "situations": []
+        },
+        {
+          "realtime": true,
+          "cancellation": false,
+          "aimedDepartureTime": "2026-10-30T17:14:00+01:00",
+          "expectedDepartureTime": "2026-10-30T17:14:00+01:00",
+          "quay": {
+            "id": "NSR:Quay:10269",
+            "publicCode": "2",
+            "name": "Lindeberg"
+          },
+          "destinationDisplay": {
+            "frontText": "Østerås"
+          },
+          "serviceJourney": {
+            "line": {
+              "publicCode": "2",
+              "transportMode": "metro"
+            }
+          },
+          "situations": []
+        },
+        {
+          "realtime": true,
+          "cancellation": false,
+          "aimedDepartureTime": "2026-10-30T17:17:00+01:00",
+          "expectedDepartureTime": "2026-10-30T17:17:00+01:00",
+          "quay": {
+            "id": "NSR:Quay:10270",
+            "publicCode": "1",
+            "name": "Lindeberg"
+          },
+          "destinationDisplay": {
+            "frontText": "Ellingsrudåsen"
+          },
+          "serviceJourney": {
+            "line": {
+              "publicCode": "2",
+              "transportMode": "metro"
+            }
+          },
+          "situations": []
+        },
+        {
+          "realtime": true,
+          "cancellation": false,
+          "aimedDepartureTime": "2026-10-30T17:16:00+01:00",
+          "expectedDepartureTime": "2026-10-30T17:19:08+01:00",
+          "quay": {
+            "id": "NSR:Quay:10272",
+            "publicCode": "",
+            "name": "Lindeberg T"
+          },
+          "destinationDisplay": {
+            "frontText": "Grorud T"
+          },
+          "serviceJourney": {
+            "line": {
+              "publicCode": "79",
+              "transportMode": "bus"
+            }
+          },
+          "situations": []
+        },
+        {
+          "realtime": true,
+          "cancellation": false,
+          "aimedDepartureTime": "2026-10-30T17:11:00+01:00",
+          "expectedDepartureTime": "2026-10-30T17:19:27+01:00",
+          "quay": {
+            "id": "NSR:Quay:10272",
+            "publicCode": "",
+            "name": "Lindeberg T"
+          },
+          "destinationDisplay": {
+            "frontText": "Ellingsrudåsen"
+          },
+          "serviceJourney": {
+            "line": {
+              "publicCode": "26",
+              "transportMode": "bus"
+            }
+          },
+          "situations": []
+        },
+        {
+          "realtime": true,
+          "cancellation": false,
+          "aimedDepartureTime": "2026-10-30T17:21:00+01:00",
+          "expectedDepartureTime": "2026-10-30T17:21:00+01:00",
+          "quay": {
+            "id": "NSR:Quay:10269",
+            "publicCode": "2",
+            "name": "Lindeberg"
+          },
+          "destinationDisplay": {
+            "frontText": "Østerås"
+          },
+          "serviceJourney": {
+            "line": {
+              "publicCode": "2",
+              "transportMode": "metro"
+            }
+          },
+          "situations": []
+        },
+        {
+          "realtime": false,
+          "cancellation": false,
+          "aimedDepartureTime": "2026-10-30T17:22:00+01:00",
+          "expectedDepartureTime": "2026-10-30T17:22:00+01:00",
+          "quay": {
+            "id": "NSR:Quay:10274",
+            "publicCode": "",
+            "name": "Lindeberg T"
+          },
+          "destinationDisplay": {
+            "frontText": "Åsbråten"
+          },
+          "serviceJourney": {
+            "line": {
+              "publicCode": "79",
+              "transportMode": "bus"
+            }
+          },
+          "situations": []
+        },
+        {
+          "realtime": true,
+          "cancellation": false,
+          "aimedDepartureTime": "2026-10-30T17:25:00+01:00",
+          "expectedDepartureTime": "2026-10-30T17:25:00+01:00",
+          "quay": {
+            "id": "NSR:Quay:10270",
+            "publicCode": "1",
+            "name": "Lindeberg"
+          },
+          "destinationDisplay": {
+            "frontText": "Ellingsrudåsen"
+          },
+          "serviceJourney": {
+            "line": {
+              "publicCode": "2",
+              "transportMode": "metro"
+            }
+          },
+          "situations": []
+        },
+        {
+          "realtime": false,
+          "cancellation": false,
+          "aimedDepartureTime": "2026-10-30T17:26:00+01:00",
+          "expectedDepartureTime": "2026-10-30T17:26:00+01:00",
+          "quay": {
+            "id": "NSR:Quay:10272",
+            "publicCode": "",
+            "name": "Lindeberg T"
+          },
+          "destinationDisplay": {
+            "frontText": "Ellingsrudåsen"
+          },
+          "serviceJourney": {
+            "line": {
+              "publicCode": "26",
+              "transportMode": "bus"
+            }
+          },
+          "situations": []
+        },
+        {
+          "realtime": true,
+          "cancellation": false,
+          "aimedDepartureTime": "2026-10-30T17:26:00+01:00",
+          "expectedDepartureTime": "2026-10-30T17:27:18+01:00",
+          "quay": {
+            "id": "NSR:Quay:10272",
+            "publicCode": "",
+            "name": "Lindeberg T"
+          },
+          "destinationDisplay": {
+            "frontText": "Grorud T"
+          },
+          "serviceJourney": {
+            "line": {
+              "publicCode": "79",
+              "transportMode": "bus"
+            }
+          },
+          "situations": []
+        },
+        {
+          "realtime": true,
+          "cancellation": false,
+          "aimedDepartureTime": "2026-10-30T17:29:00+01:00",
+          "expectedDepartureTime": "2026-10-30T17:29:00+01:00",
+          "quay": {
+            "id": "NSR:Quay:10269",
+            "publicCode": "2",
+            "name": "Lindeberg"
+          },
+          "destinationDisplay": {
+            "frontText": "Østerås"
+          },
+          "serviceJourney": {
+            "line": {
+              "publicCode": "2",
+              "transportMode": "metro"
+            }
+          },
+          "situations": []
+        },
+        {
+          "realtime": true,
+          "cancellation": false,
+          "aimedDepartureTime": "2026-10-30T17:32:00+01:00",
+          "expectedDepartureTime": "2026-10-30T17:32:00+01:00",
+          "quay": {
+            "id": "NSR:Quay:10270",
+            "publicCode": "1",
+            "name": "Lindeberg"
+          },
+          "destinationDisplay": {
+            "frontText": "Ellingsrudåsen"
+          },
+          "serviceJourney": {
+            "line": {
+              "publicCode": "2",
+              "transportMode": "metro"
+            }
+          },
+          "situations": []
+        },
+        {
+          "realtime": false,
+          "cancellation": false,
+          "aimedDepartureTime": "2026-10-30T17:32:00+01:00",
+          "expectedDepartureTime": "2026-10-30T17:32:00+01:00",
+          "quay": {
+            "id": "NSR:Quay:10274",
+            "publicCode": "",
+            "name": "Lindeberg T"
+          },
+          "destinationDisplay": {
+            "frontText": "Åsbråten"
+          },
+          "serviceJourney": {
+            "line": {
+              "publicCode": "79",
+              "transportMode": "bus"
+            }
+          },
+          "situations": []
+        }
+      ]
+    }
+  }
+}
