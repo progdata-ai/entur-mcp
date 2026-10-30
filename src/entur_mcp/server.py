@@ -88,11 +88,12 @@ def build_server(
 def main() -> None:
     parser = argparse.ArgumentParser(description="Entur MCP server")
     parser.add_argument("--http", action="store_true", help="Kjør med streamable HTTP i stedet for stdio")
+    parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=8100)
     args = parser.parse_args()
 
     server = build_server()
     if args.http:
-        server.run("streamable-http", host="127.0.0.1", port=args.port)
+        server.run("streamable-http", host=args.host, port=args.port)
     else:
         server.run("stdio")
