@@ -2,7 +2,7 @@
 
 MCP server for real-time public transport departures in Norway, using the open [Entur](https://developer.entur.org/) API. Ask Claude "when does the next metro leave?" and get live departures, grouped by platform. Lindeberg T (Oslo) is the default stop.
 
-Works with Claude Desktop (stdio) and with any MCP client over streamable HTTP, such as [progdata-agent](https://github.com/santhanc/progdata-agent).
+Works with Claude Desktop (stdio) and with any MCP client over streamable HTTP.
 
 ## Tools
 
@@ -79,8 +79,3 @@ A live test calls the real API and is skipped by default:
     uv run pytest -m live
 
 It expects the metro to run at Lindeberg, so it fails at night.
-
-## Roadmap
-
-- [ ] Use from progdata-agent as an MCP client (step 2)
-- [ ] Deploy to AWS together with progdata-agent
