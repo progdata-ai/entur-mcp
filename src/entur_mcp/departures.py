@@ -5,7 +5,7 @@ from entur_mcp.models import Call, Departure, DirectionGroup
 
 VALID_MODES: frozenset[str] = frozenset({"metro", "bus", "tram", "rail", "water", "coach", "air"})
 
-# Rail-bound modes are listed before buses, so the metro is easy to find.
+# Metro, tram and rail are listed before buses, so they are easy to find.
 MODE_ORDER = {"metro": 0, "tram": 0, "rail": 0}
 
 
@@ -13,18 +13,24 @@ class InvalidMode(ValueError):
     pass
 
 
+def validate_modes(modes: list[str] | None) -> list[str] | None:
+    """Return the modes in lower case, or None for all modes."""
+    if not modes:
+        return None
+    wanted = sorted({m.lower() for m in modes})
+    unknown = set(wanted) - VALID_MODES
+    if unknown:
+        raise InvalidMode(
+            f"Ukjent modus: {', '.join(sorted(unknown))}. "
+            f"Gyldige moduser: {', '.join(sorted(VALID_MODES))}"
+        )
+    return wanted
+
+
 def group_departures(
     calls: list[Call], now: datetime, modes: list[str] | None = None, limit: int = 5
 ) -> list[DirectionGroup]:
-    wanted = None
-    if modes:
-        wanted = {m.lower() for m in modes}
-        unknown = wanted - VALID_MODES
-        if unknown:
-            raise InvalidMode(
-                f"Ukjent modus: {', '.join(sorted(unknown))}. "
-                f"Gyldige moduser: {', '.join(sorted(VALID_MODES))}"
-            )
+    wanted = validate_modes(modes)
 
     by_quay: dict[str, list[Call]] = {}
     for call in calls:

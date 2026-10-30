@@ -52,7 +52,7 @@ async def test_graphql_variables():
     client, transport = client_with({"graphql": load_fixture("departures_lindeberg")})
     await client.estimated_calls(LINDEBERG, minutes_ahead=60)
     body = json.loads(transport.requests[0].content)
-    assert body["variables"] == {"id": LINDEBERG, "n": 50, "tr": 3600}
+    assert body["variables"] == {"id": LINDEBERG, "n": 50, "tr": 3600, "modes": None}
 
 
 async def test_unknown_stop_raises_stop_not_found():
@@ -77,3 +77,31 @@ async def test_timeout_raises_unavailable():
     client, _ = client_with({"geocoder": httpx.ReadTimeout("slow")})
     with pytest.raises(EnturUnavailable):
         await client.find_stops("Lindeberg")
+
+
+async def test_skips_malformed_calls():
+    data = load_fixture("departures_lindeberg")
+    raw = data["data"]["stopPlace"]["estimatedCalls"]
+    raw[0]["destinationDisplay"] = None
+    raw[1]["quay"] = None
+    client, _ = client_with({"graphql": data})
+    _, calls = await client.estimated_calls(LINDEBERG, minutes_ahead=60)
+    assert len(calls) == len(raw) - 2
+
+
+async def test_modes_are_sent_to_entur():
+    client, transport = client_with({"graphql": load_fixture("departures_lindeberg")})
+    await client.estimated_calls(LINDEBERG, minutes_ahead=60, modes=["metro"])
+    body = json.loads(transport.requests[0].content)
+    assert body["variables"]["modes"] == ["metro"]
+    assert "whiteListedModes: $modes" in body["query"]
+
+
+async def test_find_stops_only_returns_stop_places():
+    data = load_fixture("geocoder_lindeberg")
+    group = json.loads(json.dumps(data["features"][0]))
+    group["properties"]["id"] = "NSR:GroupOfStopPlaces:1"
+    data["features"].insert(0, group)
+    client, _ = client_with({"geocoder": data})
+    stops = await client.find_stops("Lindeberg")
+    assert all(s.id.startswith("NSR:StopPlace:") for s in stops)

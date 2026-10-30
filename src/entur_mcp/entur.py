@@ -7,11 +7,11 @@ GEOCODER_URL = "https://api.entur.io/geocoder/v1/autocomplete"
 GRAPHQL_URL = "https://api.entur.io/journey-planner/v3/graphql"
 
 DEPARTURES_QUERY = """
-query($id: String!, $n: Int!, $tr: Int!) {
+query($id: String!, $n: Int!, $tr: Int!, $modes: [TransportMode]) {
   stopPlace(id: $id) {
     id
     name
-    estimatedCalls(numberOfDepartures: $n, timeRange: $tr, includeCancelledTrips: true, arrivalDeparture: departures) {
+    estimatedCalls(numberOfDepartures: $n, timeRange: $tr, whiteListedModes: $modes, includeCancelledTrips: true, arrivalDeparture: departures) {
       realtime
       cancellation
       aimedDepartureTime
@@ -70,17 +70,19 @@ class EnturClient:
                 categories=f["properties"].get("category", []),
             )
             for f in data.get("features", [])
+            # The venue layer can also return groups of stops, which have no departures
+            if f["properties"]["id"].startswith("NSR:StopPlace:")
         ]
 
     async def estimated_calls(
-        self, stop_id: str, minutes_ahead: int, number: int = 50
+        self, stop_id: str, minutes_ahead: int, number: int = 50, modes: list[str] | None = None
     ) -> tuple[StopRef, list[Call]]:
         data = await self._request(
             "POST",
             GRAPHQL_URL,
             json={
                 "query": DEPARTURES_QUERY,
-                "variables": {"id": stop_id, "n": number, "tr": minutes_ahead * 60},
+                "variables": {"id": stop_id, "n": number, "tr": minutes_ahead * 60, "modes": modes},
             },
         )
         if data.get("errors"):
@@ -89,10 +91,19 @@ class EnturClient:
         if stop_place is None:
             raise StopNotFound(stop_id)
         stop = StopRef(id=stop_place["id"], name=stop_place["name"])
-        return stop, [_parse_call(c) for c in stop_place["estimatedCalls"]]
+        calls = (_parse_call(c) for c in stop_place["estimatedCalls"])
+        return stop, [c for c in calls if c is not None]
 
 
-def _parse_call(call: dict) -> Call:
+def _parse_call(call: dict) -> Call | None:
+    """Parse one departure, or return None if Entur left out a field we need."""
+    try:
+        return _parse_complete_call(call)
+    except (KeyError, TypeError):
+        return None
+
+
+def _parse_complete_call(call: dict) -> Call:
     line = call["serviceJourney"]["line"]
     quay = call["quay"]
     return Call(

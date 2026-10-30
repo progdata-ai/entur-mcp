@@ -98,3 +98,23 @@ async def test_find_stop_tool():
         r = await c.call_tool("find_stop", {"name": "Lindeberg"})
     assert not r.is_error
     assert LINDEBERG in json.dumps(r.structured_content)
+
+
+@pytest.mark.parametrize(
+    "args", [{"limit": 0}, {"limit": -1}, {"minutes_ahead": 0}, {"minutes_ahead": -5}]
+)
+async def test_invalid_numbers_are_readable_errors(args):
+    server, transport = server_with()
+    async with Client(server) as c:
+        r = await c.call_tool("next_departures", args)
+    assert r.is_error
+    assert "minst 1" in text_of(r)
+    assert transport.requests == []
+
+
+async def test_modes_are_validated_before_calling_entur():
+    server, transport = server_with()
+    async with Client(server) as c:
+        r = await c.call_tool("next_departures", {"modes": ["tbane"]})
+    assert r.is_error
+    assert transport.requests == []

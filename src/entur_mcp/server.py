@@ -6,7 +6,7 @@ from mcp.server.mcpserver import MCPServer
 from mcp.server.mcpserver.exceptions import ToolError
 
 from entur_mcp.config import DEFAULT_STOP_ID, TZ
-from entur_mcp.departures import InvalidMode, group_departures
+from entur_mcp.departures import InvalidMode, group_departures, validate_modes
 from entur_mcp.entur import EnturClient, EnturUnavailable, StopNotFound
 from entur_mcp.models import DeparturesResult, StopMatch
 
@@ -32,6 +32,7 @@ def build_server(
         Bruk denne når brukeren vil velge mellom flere holdeplasser med likt navn,
         eller trenger ID-en til en holdeplass.
         """
+        _require_positive(limit=limit)
         try:
             return await client.find_stops(name, size=limit)
         except EnturUnavailable as e:
@@ -54,7 +55,9 @@ def build_server(
         avganger per plattform. Innstilte avganger har cancelled=true, og
         realtime=false betyr at tiden er fra ruteplanen.
         """
+        _require_positive(limit=limit, minutes_ahead=minutes_ahead)
         try:
+            wanted_modes = validate_modes(modes)
             other_matches: list[StopMatch] = []
             if stop is None:
                 stop_id = default_stop_id
@@ -66,8 +69,10 @@ def build_server(
                     raise ToolError(f"Fant ingen holdeplass som heter «{stop}»")
                 stop_id, other_matches = matches[0].id, matches[1:]
 
-            stop_ref, calls = await client.estimated_calls(stop_id, minutes_ahead=minutes_ahead)
-            directions = group_departures(calls, clock(), modes=modes, limit=limit)
+            stop_ref, calls = await client.estimated_calls(
+                stop_id, minutes_ahead=minutes_ahead, modes=wanted_modes
+            )
+            directions = group_departures(calls, clock(), modes=wanted_modes, limit=limit)
         except EnturUnavailable as e:
             raise ToolError(ENTUR_DOWN) from e
         except StopNotFound as e:
@@ -83,6 +88,12 @@ def build_server(
         )
 
     return server
+
+
+def _require_positive(**values: int) -> None:
+    for name, value in values.items():
+        if value < 1:
+            raise ToolError(f"{name} må være minst 1")
 
 
 def main() -> None:
