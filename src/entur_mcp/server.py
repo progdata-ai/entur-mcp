@@ -1,6 +1,7 @@
 import argparse
 from collections.abc import Callable
 from datetime import datetime
+from pathlib import Path
 
 from mcp.server.mcpserver import MCPServer
 from mcp.server.mcpserver.exceptions import ToolError
@@ -11,6 +12,12 @@ from entur_mcp.entur import EnturClient, EnturUnavailable, StopNotFound
 from entur_mcp.models import DeparturesResult, StopMatch
 
 ENTUR_DOWN = "Entur svarer ikke akkurat nå. Prøv igjen om litt."
+
+# MCP Apps (io.modelcontextprotocol/ui): a host that supports it renders
+# next_departures results with this HTML view instead of plain text.
+DEPARTURES_APP_URI = "ui://entur/departures"
+MCP_APP_MIME_TYPE = "text/html;profile=mcp-app"
+DEPARTURES_APP_HTML = (Path(__file__).parent / "departures_app.html").read_text(encoding="utf-8")
 
 
 def build_server(
@@ -38,7 +45,17 @@ def build_server(
         except EnturUnavailable as e:
             raise ToolError(ENTUR_DOWN) from e
 
-    @server.tool()
+    @server.resource(
+        DEPARTURES_APP_URI,
+        name="departures_app",
+        title="Avgangstavle",
+        description="Viser resultatet fra next_departures som en avgangstavle.",
+        mime_type=MCP_APP_MIME_TYPE,
+    )
+    def departures_app() -> str:
+        return DEPARTURES_APP_HTML
+
+    @server.tool(meta={"ui": {"resourceUri": DEPARTURES_APP_URI}})
     async def next_departures(
         stop: str | None = None,
         modes: list[str] | None = None,

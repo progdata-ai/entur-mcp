@@ -118,3 +118,23 @@ async def test_modes_are_validated_before_calling_entur():
         r = await c.call_tool("next_departures", {"modes": ["tbane"]})
     assert r.is_error
     assert transport.requests == []
+
+
+async def test_next_departures_points_to_its_app():
+    server, _ = server_with()
+    async with Client(server) as c:
+        tools = {t.name: t for t in (await c.list_tools()).tools}
+    assert tools["next_departures"].meta == {"ui": {"resourceUri": "ui://entur/departures"}}
+    assert tools["find_stop"].meta is None
+
+
+async def test_departures_app_resource_is_mcp_app_html():
+    server, _ = server_with()
+    async with Client(server) as c:
+        resources = (await c.list_resources()).resources
+        assert [str(r.uri) for r in resources] == ["ui://entur/departures"]
+        contents = (await c.read_resource("ui://entur/departures")).contents
+    assert len(contents) == 1
+    assert contents[0].mime_type == "text/html;profile=mcp-app"
+    assert contents[0].text.startswith("<!DOCTYPE html>")
+    assert "ui/initialize" in contents[0].text

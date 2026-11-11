@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Avganger</title>
+<style>
+  /* Colors follow the Progdata design language (progdata.no). */
+  :root {
+    --bg: #ffffff;
+    --fg: #13201c;
+    --muted: #56635e;
+    --line: #dedfd8;
+    --ok: #0e5e45;
+    --late: #a14e00;
+    --metro: #e2601b;
+    --bus: #c8102e;
+    --tram: #0b91ef;
+    --rail: #00367f;
+    --water: #682c88;
+    --other: #555555;
+  }
+  :root[data-theme="dark"] {
+    --bg: #1b1d21;
+    --fg: #edeeef;
+    --muted: #9a9ea4;
+    --line: #2a2d32;
+    --ok: #7fd3ae;
+    --late: #f0a050;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #1b1d21;
+      --fg: #edeeef;
+      --muted: #9a9ea4;
+      --line: #2a2d32;
+      --ok: #7fd3ae;
+      --late: #f0a050;
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--fg); }
+  body { font: 14px/1.4 "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif; padding: 12px 14px; }
+  header { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
+  h1 { font-size: 16px; font-weight: 700; margin: 0; letter-spacing: -0.02em; font-family: "Space Grotesk", system-ui, sans-serif; }
+  .updated { color: var(--muted); font-size: 12px; white-space: nowrap; }
+  section { margin-top: 10px; }
+  h2 { font-size: 12px; font-weight: 500; color: var(--muted); margin: 0 0 4px; text-transform: none; }
+  ul { list-style: none; margin: 0; padding: 0; }
+  li { display: grid; grid-template-columns: 44px 1fr auto; align-items: center; gap: 10px; padding: 6px 0; border-bottom: 1px solid var(--line); }
+  li:last-child { border-bottom: 0; }
+  .badge { color: #fff; font-weight: 600; font-size: 12px; text-align: center; border-radius: 4px; padding: 2px 0; font-variant-numeric: tabular-nums; }
+  .dest { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .notice { display: block; color: var(--late); font-size: 12px; white-space: normal; }
+  .group-notice { margin: 0 0 4px; }
+  .when { text-align: right; font-variant-numeric: tabular-nums; }
+  .mins { font-weight: 600; }
+  .clock { display: block; color: var(--muted); font-size: 12px; }
+  .rt::before { content: ""; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--ok); margin-right: 5px; vertical-align: middle; }
+  .late .clock { color: var(--late); }
+  .cancelled .dest, .cancelled .mins { text-decoration: line-through; color: var(--muted); }
+  .empty, .error { color: var(--muted); padding: 8px 0; }
+  .error { color: var(--late); }
+</style>
+</head>
+<body>
+<header>
+  <h1 id="title">Henter avganger…</h1>
+  <span class="updated" id="updated"></span>
+</header>
+<div id="content"></div>
+<script>
+(function () {
+  "use strict";
+
+  var MODE_COLORS = { metro: "--metro", bus: "--bus", coach: "--bus", tram: "--tram", rail: "--rail", water: "--water" };
+  var nextId = 1;
+  var pending = {};
+
+  function post(message) {
+    window.parent.postMessage(Object.assign({ jsonrpc: "2.0" }, message), "*");
+  }
+
+  function request(method, params) {
+    var id = nextId++;
+    post({ id: id, method: method, params: params });
+    return new Promise(function (resolve, reject) { pending[id] = { resolve: resolve, reject: reject }; });
+  }
+
+  function notify(method, params) {
+    post({ method: method, params: params || {} });
+  }
+
+  function el(tag, className, text) {
+    var node = document.createElement(tag);
+    if (className) node.className = className;
+    if (text !== undefined && text !== null) node.textContent = text;
+    return node;
+  }
+
+  function clock(iso) {
+    var d = new Date(iso);
+    return isNaN(d) ? "" : d.toLocaleTimeString("no-NO", { hour: "2-digit", minute: "2-digit" });
+  }
+
+  function minutesLabel(dep) {
+    if (dep.cancelled) return "Innstilt";
+    if (dep.minutes_until <= 0) return "Nå";
+    return dep.minutes_until + " min";
+  }
+
+  // Notices every departure in a group shares, shown once above the group.
+  function sharedNotices(departures) {
+    if (departures.length === 0) return [];
+    return (departures[0].notices || []).filter(function (n) {
+      return departures.every(function (d) { return (d.notices || []).indexOf(n) !== -1; });
+    });
+  }
+
+  function renderDeparture(dep, hidden) {
+    var li = el("li");
+    if (dep.cancelled) li.classList.add("cancelled");
+    var delayMin = Math.round((new Date(dep.expected) - new Date(dep.aimed)) / 60000);
+    if (delayMin >= 2) li.classList.add("late");
+
+    var badge = el("span", "badge", dep.line);
+    badge.style.background = "var(" + (MODE_COLORS[dep.mode] || "--other") + ")";
+    li.appendChild(badge);
+
+    var dest = el("span", "dest", dep.destination);
+    (dep.notices || []).forEach(function (n) {
+      if (hidden.indexOf(n) === -1) dest.appendChild(el("span", "notice", n));
+    });
+    li.appendChild(dest);
+
+    var when = el("span", "when");
+    var mins = el("span", "mins", minutesLabel(dep));
+    if (dep.realtime && !dep.cancelled) mins.classList.add("rt");
+    when.appendChild(mins);
+    var clockText = clock(dep.expected);
+    if (delayMin >= 2 && !dep.cancelled) clockText += " (rute " + clock(dep.aimed) + ")";
+    when.appendChild(el("span", "clock", clockText));
+    li.appendChild(when);
+    return li;
+  }
+
+  function render(result) {
+    var data = result && result.structuredContent;
+    var content = document.getElementById("content");
+    content.textContent = "";
+
+    if (result && result.isError) {
+      document.getElementById("title").textContent = "Avganger";
+      var text = (result.content || []).map(function (c) { return c.text || ""; }).join(" ");
+      content.appendChild(el("p", "error", text || "Klarte ikke å hente avganger."));
+      return;
+    }
+    if (!data || !data.stop) {
+      content.appendChild(el("p", "empty", "Ingen data."));
+      return;
+    }
+
+    document.getElementById("title").textContent = data.stop.name;
+    document.getElementById("updated").textContent = "Oppdatert " + new Date().toLocaleTimeString("no-NO", { hour: "2-digit", minute: "2-digit" });
+
+    if (!data.directions || data.directions.length === 0) {
+      content.appendChild(el("p", "empty", data.message || "Ingen avganger."));
+      return;
+    }
+
+    data.directions.forEach(function (group) {
+      var section = el("section");
+      var where = group.platform ? "Plattform " + group.platform : group.quay_name;
+      section.appendChild(el("h2", null, where + " · mot " + group.destinations.join(", ")));
+      var shared = sharedNotices(group.departures);
+      shared.forEach(function (n) { section.appendChild(el("p", "notice group-notice", n)); });
+      var list = el("ul");
+      group.departures.forEach(function (dep) { list.appendChild(renderDeparture(dep, shared)); });
+      section.appendChild(list);
+      content.appendChild(section);
+    });
+  }
+
+  function applyTheme(ctx) {
+    if (ctx && (ctx.theme === "dark" || ctx.theme === "light")) {
+      document.documentElement.setAttribute("data-theme", ctx.theme);
+    }
+  }
+
+  window.addEventListener("message", function (event) {
+    if (event.source !== window.parent) return;
+    var msg = event.data;
+    if (!msg || msg.jsonrpc !== "2.0") return;
+
+    if (msg.id !== undefined && pending[msg.id] && !msg.method) {
+      var p = pending[msg.id];
+      delete pending[msg.id];
+      if (msg.error) p.reject(msg.error); else p.resolve(msg.result);
+      return;
+    }
+    if (msg.method === "ui/notifications/tool-result") render(msg.params);
+    if (msg.method === "ui/notifications/host-context-changed") applyTheme(msg.params);
+  });
+
+  function reportSize() {
+    notify("ui/notifications/size-changed", {
+      width: document.documentElement.scrollWidth,
+      height: document.documentElement.scrollHeight,
+    });
+  }
+
+  request("ui/initialize", {
+    protocolVersion: "2026-01-26",
+    clientInfo: { name: "entur-departures", version: "1.0.0" },
+    appCapabilities: { availableDisplayModes: ["inline"] },
+  }).then(function (init) {
+    applyTheme(init && init.hostContext);
+    notify("ui/notifications/initialized");
+    reportSize();
+  });
+
+  new ResizeObserver(reportSize).observe(document.documentElement);
+})();
+</script>
+</body>
+</html>
